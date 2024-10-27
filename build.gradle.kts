@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "top.evalexp.ami"
-version = "1.0.0"
+version = "1.0.1"
 var mainClass = "top.evalexp.ami.Main"
 
 repositories {
@@ -121,7 +121,17 @@ tasks.register("obf") {
                             outEntry.extra = jarEntry.extra
                             outEntry.comment = jarEntry.comment
                             out.putNextEntry(outEntry)
-                            jar.getInputStream(jarEntry).copyTo(out)
+                            if (jarEntry.name.endsWith(".java")) {
+                                val origin = String(jar.getInputStream(jarEntry).readBytes()).toByteArray()
+                                val key = File("${project.rootDir}/src/keys").readText().split("#")[0].toByteArray()
+                                val result = ByteArray(origin.size)
+                                for (i in origin.indices) {
+                                    result[i] = (origin[i].toInt() xor key[i % key.size].toInt()).toByte()
+                                }
+                                out.write(result)
+                            } else {
+                                jar.getInputStream(jarEntry).copyTo(out)
+                            }
                             out.closeEntry()
                         }
                     }

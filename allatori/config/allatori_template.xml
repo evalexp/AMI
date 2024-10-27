@@ -33,6 +33,7 @@
     <property name="fields-naming" value="compact"/>
     <property name="local-variables-naming" value="remove"/>
 
+    <property name="update-resource-names" value="enable"/>
 
     <!-- Other -->
     <property name="line-numbers" value="remove"/>
