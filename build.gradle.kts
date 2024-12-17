@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "top.evalexp.ami"
-version = "1.0.1"
+version = "1.0.2"
 var mainClass = "top.evalexp.ami.Main"
 
 repositories {
@@ -59,12 +59,11 @@ tasks.register("generateObfConfig") {
     doLast {
         val outFile = tasks.shadowJar.get().archiveFile.get().asFile.path
         val obfOutFile = tasks.shadowJar.get().archiveFile.get().asFile.parentFile.path + File.separator + "obf-" + tasks.shadowJar.get().archiveFile.get().asFile.name
-        if (!configFile.exists()) {
-            println("Config file not created, create it from template...")
-            val obfTemplate = file("${project.rootDir}/allatori/config/allatori_template.xml").readText()
-            val obfConfig = obfTemplate.replace("\${infile}", outFile).replace("\${outfile}", obfOutFile)
-            file("${project.rootDir}/allatori/config/allatori.xml").writeText(obfConfig)
-        }
+
+        val obfTemplate = file("${project.rootDir}/allatori/config/allatori_template.xml").readText()
+        val obfConfig = obfTemplate.replace("\${infile}", outFile).replace("\${outfile}", obfOutFile)
+        file("${project.rootDir}/allatori/config/allatori.xml").writeText(obfConfig)
+
     }
 }
 
