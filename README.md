@@ -48,3 +48,5 @@ Example:
 
 - **Tomcat base**
 - **Jetty base**
+
+> Pid = 1 still work(AMI Version >= 1.0.2).
