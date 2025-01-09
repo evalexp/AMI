@@ -1,0 +1,17 @@
+{
+    "name": "ami-dev-container",
+    "image": "mcr.microsoft.com/devcontainers/java:dev-8",
+    "features": {
+	},
+    "shutdownAction": "stopContainer",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vscjava.vscode-java-pack"
+            ]
+        },
+        "jetbrains" : {
+            "backend" : "IntelliJ"
+        }
+    }
+}
